@@ -1,26 +1,15 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
-const port = 3000; // Port on which the server will run
 
-// Middleware
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'build')));
 
-// Routes
-// const routes = require('./routes');
-// app.use('/api', routes); 
-
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).send('Something broke!');
-// });
-
-app.get("/", (req, res)=>{
-  res.send("Hello World!");
-})
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+port  = 9000;
+
+app.listen(port, () =>{
+  console.log(`server is running in port no. ${port}`);
+})
